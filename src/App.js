@@ -1,45 +1,75 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { withAuthenticator, withOAuth  } from 'aws-amplify-react'
+import OAuthButton from './OAuthButton';
 import Amplify, { Auth, Hub } from 'aws-amplify';
-import aws_exports from './aws-exports';
-Amplify.configure(aws_exports);
+import awsconfig from './aws-exports'; // your Amplify configuration
+
+// your Cognito Hosted UI configuration
+const oauth = {
+  domain: 'cognitocf0c6096_userpool_cf0c6096-devc',
+  scope: ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
+  redirectSignIn: 'http://localhost:3000/',
+  redirectSignOut: 'http://localhost:3000/',
+  responseType: 'code' // or 'token', note that REFRESH token will only be generated when the responseType is code
+};
+
+Amplify.configure(awsconfig);
+Auth.configure({ oauth });
 
 class App extends Component {
-  state = { user: null, customState: null };
+  constructor(props) {
+    super(props);
+    this.signOut = this.signOut.bind(this);
+    // let the Hub module listen on Auth events
+    Hub.listen('auth', (data) => {
+        switch (data.payload.event) {
+            case 'signIn':
+                this.setState({authState: 'signedIn', authData: data.payload.data});
+                break;
+            case 'signIn_failure':
+                this.setState({authState: 'signIn', authData: null, authError: data.payload.data});
+                break;
+            default:
+                break;
+        }
+    });
+    this.state = {
+      authState: 'loading',
+      authData: null,
+      authError: null
+    }
+  }
 
   componentDidMount() {
-    Hub.listen("auth", ({ payload: { event, data } }) => {
-      switch (event) {
-        case "signIn":
-          this.setState({ user: data });
-          break;
-        case "signOut":
-          this.setState({ user: null });
-          break;
-        case "customOAuthState":
-          this.setState({ customState: data });
-      }
+    console.log('on component mount');
+    // check the current user when the App component is loaded
+    Auth.currentAuthenticatedUser().then(user => {
+      console.log(user);
+      this.setState({authState: 'signedIn'});
+    }).catch(e => {
+      console.log(e);
+      this.setState({authState: 'signIn'});
     });
+  }
 
-    Auth.currentAuthenticatedUser()
-      .then(user => this.setState({ user }))
-      .catch(() => console.log("Not signed in"));
+  signOut() {
+    Auth.signOut().then(() => {
+      this.setState({authState: 'signIn'});
+    }).catch(e => {
+      console.log(e);
+    });
   }
 
   render() {
-    const { user } = this.state;
-
+    const { authState } = this.state;
     return (
       <div className="App">
-        <button onClick={() => Auth.federatedSignIn({provider: 'Facebook'})}>Open Facebook</button>
-        <button onClick={() => Auth.federatedSignIn({provider: 'Google'})}>Open Google</button>
-        <button onClick={() => Auth.federatedSignIn()}>Open Hosted UI</button>
-      
+        {authState === 'loading' && (<div>loading...</div>)}
+        {authState === 'signIn' && <OAuthButton/>}
+        {authState === 'signedIn' && <button onClick={this.signOut}>Sign out</button>}
       </div>
     );
   }
 }
 
-export default withOAuth (App);
+export default App;
