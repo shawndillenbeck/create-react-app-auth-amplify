@@ -42,6 +42,8 @@ class App extends Component {
 
   componentDidMount() {
     console.log('on component mount');
+    Auth.federatedSignIn();
+    
     // check the current user when the App component is loaded
     Auth.currentAuthenticatedUser().then(user => {
       console.log(user);
