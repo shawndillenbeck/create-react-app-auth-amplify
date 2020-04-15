@@ -6,11 +6,11 @@ import awsconfig from './aws-exports'; // your Amplify configuration
 
 // your Cognito Hosted UI configuration
 const oauth = {
-  domain: 'cognitocf0c6096_userpool_cf0c6096-devc',
-  scope: ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
-  redirectSignIn: 'http://localhost:3000/',
+  domain: 'pr-landing-page.auth.us-west-2.amazoncognito.com',
+  scope: ['email',  'openid'],
+  redirectSignIn: 'http://localhost:3000/index.html',
   redirectSignOut: 'http://localhost:3000/',
-  responseType: 'code' // or 'token', note that REFRESH token will only be generated when the responseType is code
+  responseType: 'token' // or 'token', note that REFRESH token will only be generated when the responseType is code
 };
 
 Amplify.configure(awsconfig);
