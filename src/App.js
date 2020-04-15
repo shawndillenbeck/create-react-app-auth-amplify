@@ -47,8 +47,10 @@ class App extends Component {
            this.setState({authState: 'signedIn'});
         }).catch(e => {
           this.setState({authState: 'signIn'});
+          
           console.log(e);
-        });
+          debugger;
+    });
     
     // check the current user when the App component is loaded
    // Auth.currentAuthenticatedUser().then(user => {
