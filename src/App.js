@@ -28,20 +28,20 @@ class App extends Component {
     super(props);
     this.signOut = this.signOut.bind(this);
     // let the Hub module listen on Auth events
-    //Hub.listen('auth', (data) => {
-    //  console.log(`Data: ${JSON.stringify(data)}`);
-    //    switch (data.payload.event) {
-    //        case 'signIn':
-    //            this.setState({authState: 'signedIn', authData: data.payload.data});
-    //            break;
-    //        case 'signIn_failure':
-    //            this.setState({authState: 'signIn', authData: null, authError: data.payload.data});
-    //            break;
-    //        default:
-    //            break;
-    //    }
+    Hub.listen('auth', (data) => {
+      console.log(`Data: ${JSON.stringify(data)}`);
+        switch (data.payload.event) {
+            case 'signIn':
+                this.setState({authState: 'signedIn', authData: data.payload.data});
+                break;
+            case 'signIn_failure':
+                this.setState({authState: 'signIn', authData: null, authError: data.payload.data});
+                break;
+            default:
+                  break;
+        }
       
-    //});
+    });
     
     Hub.listen('authorize', (data) => {
       console.log(`Data: ${JSON.stringify(data)}`);
@@ -66,32 +66,25 @@ class App extends Component {
 
   componentDidMount() {
     console.log('on component mount');
-    Auth.federatedSignIn().then(credentials => {
-          console.log('credentials', credentials);
-          console.log('Cache',Cache.getItem('federatedInfo'));
-          //Auth.currentAuthenticatedUser().then(user => {
-          //    console.log(user);
-
-     //       }).catch(e => {
-    //          console.log(e);
-    //         throw e;
-    //        });
-           this.setState({authState: 'signedIn'});
-        }).catch(e => {
-          this.setState({authState: 'signIn'});
+//    Auth.federatedSignIn().then(credentials => {
+//          console.log('credentials', credentials);
+//          console.log('Cache',Cache.getItem('federatedInfo'));
+//           this.setState({authState: 'signedIn'});
+ //       }).catch(e => {
+ //         this.setState({authState: 'signIn'});
           
-          console.log(e);
-          throw e;
-    });
+  //        console.log(e);
+  //        throw e;
+   // });
     
     // check the current user when the App component is loaded
-   // Auth.currentAuthenticatedUser().then(user => {
-   //   console.log(user);
-    //  this.setState({authState: 'signedIn'});
-   // }).catch(e => {
-   //   console.log(e);
-   //   this.setState({authState: 'signIn'});
-   // });
+    Auth.currentAuthenticatedUser().then(user => {
+      console.log(user);
+      this.setState({authState: 'signedIn'});
+    }).catch(e => {
+      console.log(e);
+      this.setState({authState: 'signIn'});
+    });
   }
 
   signOut() {
