@@ -36,7 +36,7 @@ class App extends Component {
         <button onClick={() => Auth.federatedSignIn({provider: 'Facebook'})}>Open Facebook</button>
         <button onClick={() => Auth.federatedSignIn({provider: 'Google'})}>Open Google</button>
         <button onClick={() => Auth.federatedSignIn()}>Open Hosted UI</button>
-        <button onClick={() => Auth.signOut()}>Sign Out {user.getUsername()}</button>
+      
       </div>
     );
   }
