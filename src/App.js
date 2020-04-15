@@ -38,3 +38,4 @@ class App extends Component {
     );
   }
 }
+export default withAuthenticator(App);
