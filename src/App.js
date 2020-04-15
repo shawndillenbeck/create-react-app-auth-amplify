@@ -29,6 +29,7 @@ class App extends Component {
     this.signOut = this.signOut.bind(this);
     // let the Hub module listen on Auth events
     Hub.listen('auth', (data) => {
+      console.log(`Data: ${JSON.stringify(data)}`);
         switch (data.payload.event) {
             case 'signIn':
                 this.setState({authState: 'signedIn', authData: data.payload.data});
@@ -39,7 +40,7 @@ class App extends Component {
             default:
                 break;
         }
-      console.log (data);
+      
     });
     this.state = {
       authState: 'loading',
