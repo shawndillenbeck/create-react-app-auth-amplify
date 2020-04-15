@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import OAuthButton from './OAuthButton';
-import Amplify, { Auth, Hub } from 'aws-amplify';
+import Amplify, { Auth, Hub, Cache  } from 'aws-amplify';
 import awsconfig from './aws-exports'; // your Amplify configuration
 
 // your Cognito Hosted UI configuration
