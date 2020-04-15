@@ -44,18 +44,19 @@ class App extends Component {
     console.log('on component mount');
     Auth.federatedSignIn().then(credentials => {
           console.log('credentials', credentials);
+           this.setState({authState: 'signedIn');
         }).catch(e => {
           console.log(e);
         });
     
     // check the current user when the App component is loaded
-    Auth.currentAuthenticatedUser().then(user => {
-      console.log(user);
-      this.setState({authState: 'signedIn'});
-    }).catch(e => {
-      console.log(e);
-      this.setState({authState: 'signIn'});
-    });
+   // Auth.currentAuthenticatedUser().then(user => {
+   //   console.log(user);
+    //  this.setState({authState: 'signedIn'});
+   // }).catch(e => {
+   //   console.log(e);
+   //   this.setState({authState: 'signIn'});
+   // });
   }
 
   signOut() {
