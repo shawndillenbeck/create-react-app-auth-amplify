@@ -39,6 +39,7 @@ class App extends Component {
             default:
                 break;
         }
+      console.log (data);
     });
     this.state = {
       authState: 'loading',
