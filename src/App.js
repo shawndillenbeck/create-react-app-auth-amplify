@@ -46,6 +46,7 @@ class App extends Component {
           console.log('credentials', credentials);
            this.setState({authState: 'signedIn'});
         }).catch(e => {
+          this.setState({authState: 'signIn'});
           console.log(e);
         });
     
