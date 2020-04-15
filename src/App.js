@@ -28,20 +28,20 @@ class App extends Component {
     super(props);
     this.signOut = this.signOut.bind(this);
     // let the Hub module listen on Auth events
-    Hub.listen('auth', (data) => {
-      console.log(`Data: ${JSON.stringify(data)}`);
-        switch (data.payload.event) {
-            case 'signIn':
-                this.setState({authState: 'signedIn', authData: data.payload.data});
-                break;
-            case 'signIn_failure':
-                this.setState({authState: 'signIn', authData: null, authError: data.payload.data});
-                break;
-            default:
-                break;
-        }
+    //Hub.listen('auth', (data) => {
+    //  console.log(`Data: ${JSON.stringify(data)}`);
+    //    switch (data.payload.event) {
+    //        case 'signIn':
+    //            this.setState({authState: 'signedIn', authData: data.payload.data});
+    //            break;
+    //        case 'signIn_failure':
+    //            this.setState({authState: 'signIn', authData: null, authError: data.payload.data});
+    //            break;
+    //        default:
+    //            break;
+    //    }
       
-    });
+    //});
     
     Hub.listen('authorize', (data) => {
       console.log(`Data: ${JSON.stringify(data)}`);
