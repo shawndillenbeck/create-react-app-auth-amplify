@@ -8,7 +8,7 @@ import awsconfig from './aws-exports'; // your Amplify configuration
 const oauth = {
   domain: 'pr-landing-page.auth.us-west-2.amazoncognito.com',
   scope: ['email',  'openid'],
-  redirectSignIn: 'https://master.d33pteq2oqztkg.amplifyapp.com/index.html',
+  
   
   responseType: 'token' // or 'token', note that REFRESH token will only be generated when the responseType is code
 };
@@ -49,7 +49,7 @@ class App extends Component {
           this.setState({authState: 'signIn'});
           
           console.log(e);
-          debugger;
+          throw e;
     });
     
     // check the current user when the App component is loaded
