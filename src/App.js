@@ -10,7 +10,7 @@ const oauth = {
   scope: ['email',  'openid'],
   redirectSignIn: 'https://master.d33pteq2oqztkg.amplifyapp.com',
   
-  responseType: 'code' // or 'token', note that REFRESH token will only be generated when the responseType is code
+  responseType: 'token' // or 'token', note that REFRESH token will only be generated when the responseType is code
 };
 
 Amplify.configure(awsconfig);
@@ -66,16 +66,16 @@ class App extends Component {
 
   componentDidMount() {
     console.log('on component mount');
-//    Auth.federatedSignIn().then(credentials => {
-//          console.log('credentials', credentials);
-//          console.log('Cache',Cache.getItem('federatedInfo'));
-//           this.setState({authState: 'signedIn'});
- //       }).catch(e => {
- //         this.setState({authState: 'signIn'});
+    Auth.federatedSignIn('COGNITO').then(credentials => {
+          console.log('credentials', credentials);
+          console.log('Cache',Cache.getItem('federatedInfo'));
+           this.setState({authState: 'signedIn'});
+        }).catch(e => {
+          this.setState({authState: 'signIn'});
           
-  //        console.log(e);
-  //        throw e;
-   // });
+          console.log(e);
+          throw e;
+   });
     
     // check the current user when the App component is loaded
     Auth.currentAuthenticatedUser().then(user => {
