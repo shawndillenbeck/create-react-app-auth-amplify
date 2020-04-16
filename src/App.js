@@ -53,16 +53,16 @@ class App extends Component {
 
   componentDidMount() {
     console.log('on component mount');
- //   Auth.federatedSignIn('Okta').then(credentials => {
- //         console.log('credentials', credentials);
- //         console.log('Cache',Cache.getItem('federatedInfo'));
- //          this.setState({authState: 'signedIn'});
- //       }).catch(e => {
-  //        this.setState({authState: 'signIn'});
+    Auth.federatedSignIn('OktaProvider').then(credentials => {
+          console.log('credentials', credentials);
+          console.log('Cache',Cache.getItem('federatedInfo'));
+           this.setState({authState: 'signedIn'});
+        }).catch(e => {
+          this.setState({authState: 'signIn'});
           
-  //        console.log(e);
+          console.log(e);
          // throw e;
-  // });
+   });
     
     // check the current user when the App component is loaded
     Auth.currentAuthenticatedUser().then(user => {
