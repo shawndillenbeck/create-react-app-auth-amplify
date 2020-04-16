@@ -53,7 +53,7 @@ class App extends Component {
 
   componentDidMount() {
     console.log('on component mount');
-    Auth.federatedSignIn().then(credentials => {
+    Auth.federatedSignIn('Okta').then(credentials => {
           console.log('credentials', credentials);
           console.log('Cache',Cache.getItem('federatedInfo'));
            this.setState({authState: 'signedIn'});
