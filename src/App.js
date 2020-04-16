@@ -43,20 +43,7 @@ class App extends Component {
       
     });
     
-    Hub.listen('authorize', (data) => {
-      console.log(`Data: ${JSON.stringify(data)}`);
-        switch (data.payload.event) {
-            case 'signIn':
-                this.setState({authState: 'signedIn', authData: data.payload.data});
-                break;
-            case 'signIn_failure':
-                this.setState({authState: 'signIn', authData: null, authError: data.payload.data});
-                break;
-            default:
-                break;
-        }
-      
-    });
+  
     this.state = {
       authState: 'loading',
       authData: null,
@@ -66,7 +53,7 @@ class App extends Component {
 
   componentDidMount() {
     console.log('on component mount');
-    Auth.federatedSignIn('COGNITO').then(credentials => {
+    Auth.federatedSignIn({provider: 'Okta'}).then(credentials => {
           console.log('credentials', credentials);
           console.log('Cache',Cache.getItem('federatedInfo'));
            this.setState({authState: 'signedIn'});
