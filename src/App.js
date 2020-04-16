@@ -16,12 +16,12 @@ const oauth = {
 Amplify.configure(awsconfig);
 Auth.configure({ oauth });
 
-//Auth.configure({
-//  oauth: oauth,
+Auth.configure({
+  oauth: oauth,
 //  region: 'us-west-2',
 //  userPoolId: 'us-west-2_cognitocf0c6096_userpool_cf0c6096-devc',
-//  userPoolWebClientId: '4mbferift1eu845umvfe5el88q'
-//});
+  userPoolWebClientId: '4mbferift1eu845umvfe5el88q'
+});
 
 class App extends Component {
   constructor(props) {
