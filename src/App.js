@@ -9,7 +9,7 @@ const oauth = {
   domain: 'pr-landing-page.auth.us-west-2.amazoncognito.com',
   scope: ['email',  'openid'],
   redirectSignIn: 'https://master.d33pteq2oqztkg.amplifyapp.com/',
-  
+  client_id: '4mbferift1eu845umvfe5el88q',
   responseType: 'token' // or 'token', note that REFRESH token will only be generated when the responseType is code
 };
 
