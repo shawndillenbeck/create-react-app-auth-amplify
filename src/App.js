@@ -14,7 +14,7 @@ const oauth = {
 };
 
 Amplify.configure(awsconfig);
-//Auth.configure({ oauth });
+Auth.configure({ oauth });
 
 //Auth.configure({
 //  oauth: oauth,
