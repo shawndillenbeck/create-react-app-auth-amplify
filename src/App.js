@@ -19,7 +19,7 @@ Auth.configure({ oauth });
 Auth.configure({
   oauth: oauth,
 //  region: 'us-west-2',
-  userPoolId: 'OktaUserPool',
+//  userPoolId: '2m2a1crouqml2lmlj7qvrlqieq',
   userPoolWebClientId: '2m2a1crouqml2lmlj7qvrlqieq'
 });
 
