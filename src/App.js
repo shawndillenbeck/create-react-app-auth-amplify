@@ -10,7 +10,7 @@ const oauth = {
   scope: ['email',  'openid'],
   redirectSignIn: 'https://master.d33pteq2oqztkg.amplifyapp.com',
   
-  responseType: 'token' // or 'token', note that REFRESH token will only be generated when the responseType is code
+  responseType: 'code' // or 'token', note that REFRESH token will only be generated when the responseType is code
 };
 
 Amplify.configure(awsconfig);
