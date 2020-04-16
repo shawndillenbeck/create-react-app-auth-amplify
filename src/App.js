@@ -6,10 +6,10 @@ import awsconfig from './aws-exports'; // your Amplify configuration
 
 // your Cognito Hosted UI configuration
 const oauth = {
-  domain: 'pr-landing-page.auth.us-west-2.amazoncognito.com',
+  domain: 'prlandingpage.auth.us-west-2.amazoncognito.com',
   scope: ['email',  'openid'],
   redirectSignIn: 'https://master.d33pteq2oqztkg.amplifyapp.com/',
-  client_id: '4mbferift1eu845umvfe5el88q',
+  client_id: '2m2a1crouqml2lmlj7qvrlqieq',
   responseType: 'token' // or 'token', note that REFRESH token will only be generated when the responseType is code
 };
 
@@ -19,8 +19,8 @@ Auth.configure({ oauth });
 Auth.configure({
   oauth: oauth,
 //  region: 'us-west-2',
-  userPoolId: 'cognitocf0c6096_userpool_cf0c6096-devc',
-  userPoolWebClientId: '4mbferift1eu845umvfe5el88q'
+  userPoolId: 'OktaUserPool',
+  userPoolWebClientId: '2m2a1crouqml2lmlj7qvrlqieq'
 });
 
 class App extends Component {
